@@ -145,7 +145,12 @@ def main():
     # File upload
     col1, col2 = st.columns(2)
     with col1:
-        uploaded_file = st.file_uploader("Upload Resume (PDF)", type="pdf")
+        # uploaded_file = st.file_uploader("Upload Resume (PDF)", type="pdf")
+        uploaded_file = st.file_uploader(
+            "Upload Resume (PDF or Word)", 
+            type=["pdf", "doc", "docx"],
+            help="Supported formats: PDF, DOC, DOCX"
+        )
     with col2:
         jd_text = st.text_area("Paste Job Description", height=200)
 
