@@ -52,12 +52,13 @@ def parse_resume(file_path: str, parser) -> str:
 def analyze_resume(resume_text: str, jd_text: str, model) -> dict:
     """Get structured analysis from Gemini with robust JSON handling"""
     prompt = f"""
-    Analyze this resume against the job description. Return STRICT JSON with:
-    - match_score (0-100)
-    - matching_skills (list)
-    - missing_skills (list)
-    - experience (years)
-    - suggestions (list)
+    Analyze this resume against the job description. Consider only directly matching skills and experience.
+    Return STRICT JSON with:
+    - match_score (0-100 based only on exact matches)
+    - matching_skills (list of directly matched skills)
+    - missing_skills (list of job description skills not found in resume)
+    - experience (years matching JD requirements)
+    - suggestions (list of improvements)
     - summary (str)
 
     Resume:
@@ -111,7 +112,6 @@ def parse_gemini_response(response_text: str) -> dict:
             "suggestions": extract_list(response_text, "suggestions"),
             "summary": extract_value(response_text, "summary", str)
         }
-
 
 # Helper functions
 def extract_value(text: str, key: str, type_func):
