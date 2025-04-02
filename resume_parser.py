@@ -133,8 +133,8 @@ def extract_list(text: str, key: str) -> list:
 
 # Streamlit UI
 def main():
-    st.set_page_config(page_title="AI Resume Screener", layout="wide")
-    st.title("📄 AI Resume Screener")
+    st.set_page_config(page_title="Talenthive Resume Parser", layout="wide")
+    st.title("📄 Talenthive Resume Parser")
     st.markdown("Upload a resume and job description to analyze compatibility")
 
     # Initialize APIs
@@ -164,7 +164,7 @@ def main():
                 return
 
         # Analyze
-        with st.spinner("Analyzing with AI..."):
+        with st.spinner("Analyzing with TalentHive AI..."):
             analysis = analyze_resume(resume_text, jd_text, model)
 
         # Display results
